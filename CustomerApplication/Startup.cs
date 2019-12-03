@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CustomerApplication.Models.Product;
 using CustomerApplication.Models.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,9 @@ namespace CustomerApplication
 
             services.AddDbContext<RegistrationContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("registrationContext")));
+
+            services.AddDbContext<ProductContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("productContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
