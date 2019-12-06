@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CustomerApplication.Models.OrderHistory;
 using CustomerApplication.Models.Product;
 using CustomerApplication.Models.Registration;
+using CustomerApplication.Models.Review;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +41,13 @@ namespace CustomerApplication
 
             services.AddDbContext<ProductContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("productContext")));
+
+            services.AddDbContext<ReviewContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("reviewContext")));
+
+
+            services.AddDbContext<OrderHistoryContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("orderhistoryContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
