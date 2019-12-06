@@ -19,5 +19,12 @@
 
   <ItemGroup>
     <Folder Include="Models\Product\" />
+    <Folder Include="Models\Review\" />
+    <Folder Include="Models\OrderHistory\" />
+    <Folder Include="Views\Logins\" />
+    <Folder Include="Views\Invoices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Login\Index.cshtml" />
   </ItemGroup>
 </Project>
