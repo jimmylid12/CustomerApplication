@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CustomerApplication.Models.OrderHistory;
+﻿using CustomerApplication.Models.OrderHistory;
 using CustomerApplication.Models.Product;
-using CustomerApplication.Models.Registration;
 using CustomerApplication.Models.Review;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RegisterApplication.Services;
 
 namespace CustomerApplication
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            _env = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment _env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,8 +33,17 @@ namespace CustomerApplication
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<RegistrationContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("registrationContext")));
+            if (_env.IsDevelopment())
+            {
+                services.AddTransient<IRegisterService, FakeRegisterService>();
+            }
+            else
+            {
+                services.AddHttpClient<IRegisterService, RegisterService>();
+            }
+
+            //services.AddDbContext<RegistrationContext>(options =>
+            //options.UseSqlite(Configuration.GetConnectionString("registrationContext")));
 
             services.AddDbContext<ProductContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("productContext")));
