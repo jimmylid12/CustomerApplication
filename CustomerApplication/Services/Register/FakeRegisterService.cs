@@ -9,8 +9,8 @@ namespace RegisterApplication.Services
     {
         public List<RegisterDto> _register = new List<RegisterDto>
         {
-            new RegisterDto { Id = 3, Name = "Musa Haamwala", Address = "2 Tell close", PostCode = "JG3 5BD" },
-            new RegisterDto { Id = 4, Name = "Lsoij Haamwala", Address = "5 Tell close", PostCode = "JG3 5BD" }
+            new RegisterDto { Id = 3, Name = "James Liddle", Address = "41 portman street", PostCode = "ts1 2es" },
+            new RegisterDto { Id = 4, Name = "James Liddle", Address = "12 summerfield road", PostCode = "yo4395" }
         };
 
         public Task<IEnumerable<RegisterDto>> GetRegisterAsync()
@@ -18,9 +18,47 @@ namespace RegisterApplication.Services
             return Task.FromResult(_register.AsEnumerable());
         }
 
-        public Task<IEnumerable<RegisterDto>> GetRegistersAsync(int Id)
+        Task<RegisterDto> IRegisterService.PostRegisterAsync(RegisterDto registerDto)
         {
-            return Task.FromResult(_register.AsEnumerable());
+            _register.Add(registerDto);
+            return Task.FromResult(registerDto);
         }
+
+        Task<RegisterDto> IRegisterService.EditRegisterAsync(int Id)
+        {
+            var customer = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(customer);
+        }
+
+
+        Task<RegisterDto> IRegisterService.DetailsRegisterAsync(int Id)
+        {
+            var customer = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(customer);
+        }
+
+        Task<RegisterDto> IRegisterService.GetDeleteRegisterAsync(int Id)
+        {
+            var customer = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(customer);
+        }
+
+        public Task<RegisterDto> DeleteRegisterAsync(int Id)
+        {
+            var order = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(order);
+        }
+
+        Task<RegisterDto> IRegisterService.PutRegisterAsync(RegisterDto register)
+        {
+            _register.Add(register);
+            return Task.FromResult(register);
+        }
+
+        public bool GetRegisterExists(int Id)
+        {
+            return true;
+        }
+
     }
 }
