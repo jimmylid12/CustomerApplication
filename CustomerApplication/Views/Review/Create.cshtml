@@ -1,4 +1,4 @@
-@model CustomerApplication.Models.Review.ReviewDTO
+@model ReviewApplication.Services.ReviewDto
 
 @{
     ViewData["Title"] = "Create";
@@ -13,16 +13,32 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Review" class="control-label"></label>
-                <input asp-for="Review" class="form-control" />
-                <span asp-validation-for="Review" class="text-danger"></span>
+                <label asp-for="CustomerID" class="control-label"></label>
+                <input asp-for="CustomerID" class="form-control" />
+                <span asp-validation-for="CustomerID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Mark" class="control-label"></label>
-                <input asp-for="Mark" class="form-control" />
-                <span asp-validation-for="Mark" class="text-danger"></span>
+                <label asp-for="ProductID" class="control-label"></label>
+                <input asp-for="ProductID" class="form-control" />
+                <span asp-validation-for="ProductID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                 <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+                 <div class="form-group">
+                <label asp-for="Comments" class="control-label"></label>
+                <input asp-for="Comments" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+                    <div class="form-group">
+                <label asp-for="Visible" class="control-label"></label>
+                <input asp-for="Visible" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

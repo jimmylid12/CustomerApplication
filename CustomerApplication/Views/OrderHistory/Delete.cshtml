@@ -1,4 +1,4 @@
-@model CustomerApplication.Models.OrderHistory.OrderHistoryDTO
+@model OrderApplication.Services.OrderDto
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,17 +11,51 @@
     <h4>OrderHistoryDTO</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Product)
+      <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Product)
+            @Html.DisplayFor(model => model.CustomerID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.ProductID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+         <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+         <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+         <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+                 <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+                 <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.ShippingAddress)
+        </dd>
+                 <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShippingAddress)
+        </dd>
+        </dd>
+                 <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        </dd>
+                 <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        </dd>
+                 <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.ShippingDate)
+        </dd>
+        </dd>
+                 <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShippingDate)
         </dd>
     </dl>
     

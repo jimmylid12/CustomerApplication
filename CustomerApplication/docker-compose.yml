@@ -1,6 +1,5 @@
 ﻿version: '3'
 
-
 services:
 #Servers
   ms-sql-server-orders:
@@ -12,28 +11,37 @@ services:
     ports:
       - "1433:1433"
 
-    
+      # API's
+  # customer-orders-api:
+   #  image: jimmylid12/customerorderservice
+   #  environment:
+   #    DBServer: "ms-sql-server-orders"
+   #  ports:
+    #  - "8082:80"
+      
        #API's
   customer-accounts-api:
     image: mhamwala/customer-account-api
     environment:
       DBServer: "ms-sql-server-orders"
     ports:
-      - "8081:80"
+      - "8080:80"
 
-
-
-
-
-
-
-
+    #API'
+  # manage-products-api:
+  #   image: nathanlloyd/manage-products-api
+  #   environment:
+   #    DBServer: "ms-sql-server-orders"
+   #  ports:
+    #   - "8081:80"
+    
   #Web APPS
   customer-app:
     build: .
     environment:
-      - CustomerOrderUrl=http://customer-accounts-api
-      - ManageProductsUrl=http://Manage-Products-api
+      - CustomerAccountsUrl=http://customer-accounts-api
+      - ManageProductsUrl=http://manage-products-api
+      - CustomerOrdersUrl=http://customer-orders-api
     ports:
       - 5100:80
 
