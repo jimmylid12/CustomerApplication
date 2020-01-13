@@ -3,11 +3,13 @@ namespace RegisterApplication.Services
 {
     public class RegisterDto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
-
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string Address { get; set; }
-        public string PostCode { get; set; }
-        public string TelephoneNumber { get; set; }
+        public string Postcode { get; set; }
+        public string Telephone { get; set; }
+        public bool IsComplete { get; set; }
     }
 }

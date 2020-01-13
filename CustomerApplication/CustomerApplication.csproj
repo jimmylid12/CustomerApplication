@@ -22,15 +22,36 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Product\" />
-    <Folder Include="Models\Review\" />
-    <Folder Include="Models\OrderHistory\" />
     <Folder Include="Views\Logins\" />
     <Folder Include="Services\Review\" />
     <Folder Include="Services\Orders\" />
     <Folder Include="Services\Products\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\Registration\RegistrationDTO.cs" />
+    <Compile Remove="Models\Registration\RegistrationContext.cs" />
+    <Compile Remove="Models\Product\ProductDTO.cs" />
+    <Compile Remove="Models\Product\ProductContext.cs" />
+    <Compile Remove="Models\OrderHistory\OrderHistoryContext.cs" />
+    <Compile Remove="Models\OrderHistory\OrderHistoryDTO.cs" />
+    <Compile Remove="Models\Review\ReviewContext.cs" />
+    <Compile Remove="Models\Review\ReviewDTO.cs" />
+    <Compile Remove="Migrations\OrderHistory\20191203232802_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\OrderHistory\20191203232802_InitialCreate.cs" />
+    <Compile Remove="Migrations\Registration\20191203141827_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\Registration\20191203141827_InitialCreate.cs" />
+    <Compile Remove="Migrations\Registration\RegistrationContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\Product\20191203171144_InitialCreate.cs" />
+    <Compile Remove="Migrations\Product\ProductContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\Product\20191203171144_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\OrderHistory\OrderHistoryContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\Review\20191203230231_InitialCreate.cs" />
+    <Compile Remove="Migrations\Review\ReviewContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\Review\20191203230231_InitialCreate.Designer.cs" />
+    <Compile Remove="Models.cs" />
   </ItemGroup>
 </Project>

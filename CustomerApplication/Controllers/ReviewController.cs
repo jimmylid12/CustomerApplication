@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using ReviewApplication.Services;
-
+//this is what displays the reviews of products and you are able to add your own
 namespace ReviewApplication.Controllers
 {
     public class ReviewController : Controller
@@ -20,7 +20,7 @@ namespace ReviewApplication.Controllers
             _logger = logger;
             _reviewService = reviewService;
         }
-        // GET: Register
+        // GET: Reviews and returns them to the view in a list
         public async Task<IActionResult> Index()
         {
             if (!ModelState.IsValid)
@@ -34,22 +34,22 @@ namespace ReviewApplication.Controllers
             }
             catch (HttpRequestException)
             {
-                _logger.LogWarning("Exception Occured using review service.");
+                _logger.LogWarning("Error.");
                 reviews = Array.Empty<ReviewDto>();
             }
             return View(reviews.ToList());
         }
 
-        // GET: review
+        
         public IActionResult Create()
         {
             return View();
         }
 
-
+        //This is what creates the review and adds it to the database and returns it to the view
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Review,Mark")] ReviewDto reviewDto)
+        public async Task<IActionResult> Create([Bind("Comments,CustomerID,ProductID,Rating,Visible")] ReviewDto reviewDto)
         {
             if (!ModelState.IsValid)
             {
@@ -59,14 +59,18 @@ namespace ReviewApplication.Controllers
             {
                 await _reviewService.PostReviewAsync(new ReviewDto
                 {
-                    Review = reviewDto.Review,
-                    Mark = reviewDto.Mark
-                   
+                    Comments = reviewDto.Comments,
+                     CustomerID = reviewDto.CustomerID,
+                     ProductID = reviewDto.ProductID,
+                     Rating = reviewDto.Rating,
+                     Visible = reviewDto.Visible,
+
+
                 });
             }
             catch (HttpRequestException)
             {
-                _logger.LogWarning("Exception Occured using staff service.");
+                _logger.LogWarning("Error.");
             }
             return View(reviewDto);
         }
@@ -75,7 +79,139 @@ namespace ReviewApplication.Controllers
 
 
 
+        // Allows customer to edit the review if they need to change it 
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
 
+            var customer = await _reviewService.EditReviewAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            return View(customer);
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, ReviewDto reviews)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var response = await _reviewService.PutReviewAsync(reviews);
+                if (!ReviewExists(id))
+                {
+                    return NotFound();
+                }
+            }
+            catch (HttpRequestException)
+            {
+                _logger.LogWarning("error.");
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        //checks if the review exsists and if not returns it
+        private bool ReviewExists(int id)
+        {
+            return _reviewService.GetReviewExists(id);
+        }
+
+
+
+
+
+        // Returns the information about the review if you need to change and update it
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details(int id, [Bind("Comments,CustomerID,ProductID,Rating,Visible")] ReviewDto reviewDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                await _reviewService.PostReviewAsync(new ReviewDto
+                {
+                    Comments = reviewDto.Comments,
+                    CustomerID = reviewDto.CustomerID,
+                    ProductID = reviewDto.ProductID,
+                    Rating = reviewDto.Rating,
+                    Visible = reviewDto.Visible,
+
+                });
+            }
+            catch (HttpRequestException)
+            {
+                _logger.LogWarning("error.");
+            }
+            return View(reviewDto);
+        }
+
+
+        // GET: Customer/Edit
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
+            var reviews = await _reviewService.DetailsReviewAsync(id);
+            if (reviews == null)
+            {
+                return NotFound();
+            }
+            return View(reviews);
+        }
+
+
+
+        // Allows you to delete the review and update the database
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
+            ReviewDto reviews = null;
+            try
+            {
+                reviews = await _reviewService.GetDeleteReviewAsync(id);
+            }
+            catch (HttpRequestException)
+            {
+                _logger.LogError("error  " + reviews);
+                _logger.LogWarning("error.");
+            }
+
+            return View(reviews);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var order = await _reviewService.DeleteReviewAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            await _reviewService.GetReviewAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
 
 
 

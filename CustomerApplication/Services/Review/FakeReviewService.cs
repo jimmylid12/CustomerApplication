@@ -9,8 +9,8 @@ namespace ReviewApplication.Services.Review
     {
         public List<ReviewDto> _register = new List<ReviewDto>
         {
-            new ReviewDto { Id = 3, Review = "James Liddle",  Mark = 41},
-            new ReviewDto { Id = 3, Review = "James Liddle",  Mark = 41}
+            new ReviewDto { Id = 3, CustomerID = 5,  Rating = 41, Comments = "good product", Visible = true, ProductID = 7},
+            new ReviewDto { Id = 3, CustomerID = 5,  Rating = 41, Comments = "good product", Visible = true, ProductID = 7}
 
         };
 
@@ -24,6 +24,46 @@ namespace ReviewApplication.Services.Review
             _register.Add(reviewDto);
             return Task.FromResult(reviewDto);
         }
+
+        Task<ReviewDto> IReviewService.EditReviewAsync(int Id)
+        {
+            var customer = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(customer);
+        }
+
+
+        Task<ReviewDto> IReviewService.DetailsReviewAsync(int Id)
+        {
+            var customer = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(customer);
+        }
+
+        Task<ReviewDto> IReviewService.GetDeleteReviewAsync(int Id)
+        {
+            var customer = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(customer);
+        }
+
+        public Task<ReviewDto> DeleteReviewAsync(int Id)
+        {
+            var order = _register.FirstOrDefault(r => r.Id == Id);
+            return Task.FromResult(order);
+        }
+
+        Task<ReviewDto> IReviewService.PutReviewAsync(ReviewDto reviews)
+        {
+            _register.Add(reviews);
+            return Task.FromResult(reviews);
+        }
+
+        public bool GetReviewExists(int Id)
+        {
+            return true;
+        }
+
+
+
+
     }
 
 }

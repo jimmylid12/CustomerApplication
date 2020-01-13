@@ -9,8 +9,9 @@ namespace RegisterApplication.Services
     {
         public List<RegisterDto> _register = new List<RegisterDto>
         {
-            new RegisterDto { Id = 3, Name = "James Liddle", Address = "41 portman street", PostCode = "ts1 2es" },
-            new RegisterDto { Id = 4, Name = "James Liddle", Address = "12 summerfield road", PostCode = "yo4395" }
+            new RegisterDto { Id = 3, Name = "James Liddle",Email = "jameslid12@tees.ac.uk" ,Password = "Test",Address = "41 portman street", Postcode = "ts1 2es", Telephone = "12344222",IsComplete =true },
+           new RegisterDto { Id = 3, Name = "James Liddle",Email = "jameslid12@tees.ac.uk" ,Password = "Test",Address = "41 portman street", Postcode = "ts1 2es", Telephone = "12344222",IsComplete =true }
+    
         };
 
         public Task<IEnumerable<RegisterDto>> GetRegisterAsync()

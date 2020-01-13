@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace CustomerApplication.Models
+namespace CustomerApplication
 {
     public class ErrorViewModel
     {

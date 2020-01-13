@@ -13,7 +13,7 @@ namespace RegisterApplication.Services
         private readonly ILogger _logger;
         public RegisterService(HttpClient client, ILogger<RegisterService> logger)
         {
-            client.BaseAddress = new System.Uri("http://customer-accounts-api/api/");
+            client.BaseAddress = new System.Uri("https://customeraccountapi.azurewebsites.net/api/");
             client.Timeout = TimeSpan.FromSeconds(5);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client = client;

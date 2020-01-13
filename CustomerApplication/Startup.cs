@@ -1,6 +1,4 @@
-﻿using CustomerApplication.Models.OrderHistory;
-using CustomerApplication.Models.Product;
-using CustomerApplication.Models.Review;
+﻿
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrderApplication.Services;
+using ProductApplication.Services;
 using RegisterApplication.Services;
+using ReviewApplication.Services;
+using ReviewApplication.Services.Review;
 
 namespace CustomerApplication
 {
@@ -33,27 +35,25 @@ namespace CustomerApplication
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            if ( _env.IsDevelopment())
+            if (!_env.IsDevelopment())
             {
                 services.AddTransient<IRegisterService, FakeRegisterService>();
+                services.AddTransient<IReviewService, FakeReviewService>();
+                services.AddTransient<IProductService, FakeProductService>();
+                services.AddTransient<IOrderService, FakeOrderService>();
             }
             else
             {
                 services.AddHttpClient<IRegisterService, RegisterService>();
+                services.AddHttpClient<IReviewService, ReviewService>();
+                services.AddHttpClient<IProductService, ProductService>();
+                services.AddHttpClient<IOrderService, OrderService>();
             }
 
             //services.AddDbContext<RegistrationContext>(options =>
             //options.UseSqlite(Configuration.GetConnectionString("registrationContext")));
 
-            services.AddDbContext<ProductContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("productContext")));
-
-            services.AddDbContext<ReviewContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("reviewContext")));
-
-
-            services.AddDbContext<OrderHistoryContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("orderhistoryContext")));
+           
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
