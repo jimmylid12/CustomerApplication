@@ -57,7 +57,7 @@ namespace OrderApplication.Controllers
         //this creates the order history and returns it to the view
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerID,ProductID,Total,Quantity,ShippingAdress,OrderDate,ShipppingDate")] OrderDto orderDto)
+        public async Task<IActionResult> Create([Bind("CustomerID,ProductID,Total,Quantity,ShippingAddress,OrderDate,ShipppingDate")] OrderDto orderDto)
         {
             if (!ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace OrderApplication.Controllers
         // Displays the orders details, and if need be can edit them
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details(int id, [Bind("CustomerID,ProductID,Total,Quantity,ShippingAdress,OrderDate,ShipppingDate")] OrderDto reviewDto)
+        public async Task<IActionResult> Details(int id, [Bind("CustomerID,ProductID,Total,Quantity,ShippingAddress,OrderDate,ShipppingDate")] OrderDto reviewDto)
         {
             if (!ModelState.IsValid)
             {
@@ -152,7 +152,8 @@ namespace OrderApplication.Controllers
                     Total = reviewDto.Total,
                     Quantity = reviewDto.Quantity,
                     ShippingDate = reviewDto.ShippingDate,
-                   ShippingAddress= reviewDto.ShippingAddress
+                    ShippingAddress= reviewDto.ShippingAddress
+                    
                 });
             }
             catch (HttpRequestException)
