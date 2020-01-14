@@ -13,7 +13,7 @@ namespace OrderApplication.Services
         private readonly ILogger _logger;
         public OrderService(HttpClient client, ILogger<OrderService> logger)
         {
-            client.BaseAddress = new System.Uri("https://customerorderapi.azurewebsites.net/api/");
+            client.BaseAddress = new System.Uri("https://customer-orders-api.azurewebsites.net/api/");
             client.Timeout = TimeSpan.FromSeconds(5);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client = client;

@@ -6,7 +6,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD:  "Pa55w0rd!!!"
+      SA_PASSWORD:  "Pa55w0rd"
       MSSQL_PID: Express
     ports:
       - "1433:1433"
@@ -20,20 +20,20 @@ services:
     #  - "8082:80"
       
        #API's
-  customer-accounts-api:
-    image: mhamwala/customer-account-api
+ #  customer-accounts-api:
+  #   image: mhamwala/customer-account-api
+  #  environment:
+  #     DBServer: "ms-sql-server-orders"
+  #   ports:
+   #    - "8080:80"
+
+    #API'
+  manage-products-api:
+    image: nathanlloyd/manage-products-api
     environment:
       DBServer: "ms-sql-server-orders"
     ports:
-      - "8080:80"
-
-    #API'
-  # manage-products-api:
-  #   image: nathanlloyd/manage-products-api
-  #   environment:
-   #    DBServer: "ms-sql-server-orders"
-   #  ports:
-    #   - "8081:80"
+      - "8081:80"
     
   #Web APPS
   customer-app:

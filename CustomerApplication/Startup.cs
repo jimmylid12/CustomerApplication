@@ -35,7 +35,7 @@ namespace CustomerApplication
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            if (!_env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 services.AddTransient<IRegisterService, FakeRegisterService>();
                 services.AddTransient<IReviewService, FakeReviewService>();
